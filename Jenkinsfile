@@ -11,4 +11,14 @@ def mavenHome = tool name: 'maven3.9.9'
           sh "${mavenHome}/bin/mvn clean package"
           }
 
+    // Stage 3: Deploy WAR to Tomcat using curl
+    stage('Deploy to Tomcat') {
+        echo "Deploying WAR file using curl..."
+
+        sh """
+            curl -u kkfunda:kkfunda \
+            --upload-file /var/lib/jenkins/workspace/scripted-pl/target/maven-web-application.war \
+            "http://174.129.132.254:8080/manager/text/deploy?path=/maven-web-application&update=true"
+        """
+    }
 }
