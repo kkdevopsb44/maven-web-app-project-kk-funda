@@ -8,7 +8,7 @@ tools
     stages {
         stage('checkout stage') { 
             steps {
-           git branch: 'jenkins', credentialsId: '8d341570-e046-4d2c-8060-33c3d5d493f7', url: 'https://github.com/gangavaramdevops/maven-web-app-project-kk-funda.git'
+           git branch: 'jenkins', credentialsId: '2098ae86-4ac4-410f-89ef-10684fdfdf6f', url: 'https://github.com/kkdevopsb44/maven-web-app-project-kk-funda.git'
             }
         }
             stage('Build') { 
@@ -17,16 +17,7 @@ tools
 
             }
           }
-          stage('SQREPORT'){
-            steps{
-          sh "mvn sonar:sonar"
-          }
-        }
-         stage('DeployTONexus'){
-           steps{
-          sh "mvn deploy"
-          }
-        }
+          
         stage('DeployAppToTomcat'){
            steps{
 
@@ -34,8 +25,8 @@ tools
 
         sh """
             curl -u kkfunda:kkfunda \
-            --upload-file /var/lib/jenkins/workspace/jio-scripted-way-pipeline-develoment/target/maven-web-application.war \
-            "http://3.108.194.157:8080/manager/text/deploy?path=/maven-web-application&update=true"
+            --upload-file /var/lib/jenkins/workspace/decalarative-PL/target/maven-web-application.war \
+            "http://44.201.126.7:8080/manager/text/deploy?path=/maven-web-application&update=true"
         """
 
           }
@@ -76,5 +67,6 @@ def notifyBuild(String buildStatus = 'STARTED') {
   }
 
   // Send notifications
-  slackSend (color: colorCode, message: summary, channel: '#jio-project')
+  slackSend (color: colorCode, message: summary)
 }
+                        
