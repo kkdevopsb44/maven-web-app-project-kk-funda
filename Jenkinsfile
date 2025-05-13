@@ -25,7 +25,7 @@ tools
 
         sh """
             curl -u kkfunda:kkfunda \
-            --upload-file /var/lib/jenkins/workspace/decalarative-PL/target/maven-web-application.war \
+            --upload-file /var/lib/jenkins/workspace/declarative-PL/target/maven-web-application.war \
             "http://44.201.126.7:8080/manager/text/deploy?path=/maven-web-application&update=true"
         """
 
